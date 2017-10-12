@@ -1,0 +1,46 @@
+! Use the following commands to test the results of this file
+
+! Load the config declared
+! > xmodmap ~/.xmodmap
+
+! Reset the keyboard mappings
+! > setxkbmap -layout gb
+
+! See configured mod keys
+! > xmodmap
+
+! Show the virtual keycodes for each keyboard key
+! > showkey
+
+! Show the scancodes for each keyboard key
+! > showkey -s
+
+! Another utility to read keycodes and keysyms
+! > xev
+
+! Use caps lock as control key
+remove control = Control_L
+remove control = Control_R
+remove lock = Caps_Lock
+keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+add lock = Caps_Lock
+add control = Control_L
+
+! AltGr mapped to Win for i3 control
+keycode 108 = Super_L
+
+! Set up space for mod3
+remove mod4 = Hyper_L
+add mod3 = Hyper_L
+
+! Use VIM style bindings with left control
+clear lock
+keycode 37 = Mode_switch
+keysym h = h H Left NoSymbol NoSymbol NoSymbol
+keysym j = j J Down NoSymbol NoSymbol NoSymbol
+keysym k = k K Up NoSymbol NoSymbol NoSymbol
+keysym l = l L Right NoSymbol NoSymbol NoSymbol
+
+! Invert scrolling
+pointer = 1 2 3 5 4 7 6 8 9 10 11 12

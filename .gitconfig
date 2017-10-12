@@ -1,0 +1,5 @@
+[user]
+	name = Faure Hu
+	email = hi@faure.hu
+[core]
+	editor = nvim

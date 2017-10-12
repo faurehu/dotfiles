@@ -1,0 +1,13 @@
+# Some of these files might need to be sourced from automatically generated dotfiles (e.g. .zshrc)
+
+export DOTFILES_PATH=~/Development/dotfiles
+ln -s $DOTFILES_PATH/.zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
+ln -s $DOTFILES_PATH/.zprofile ~/.zprofile
+ln -s $DOTFILES_PATH/.Xresource ~/.Xresource
+ln -s $DOTFILES_PATH/.Xmodmap ~/.Xmodmap
+ln -s $DOTFILES_PATH/.xinitrc ~/.xinitrc
+ln -s $DOTFILES_PATH/.i3status.conf ~/.i3status.conf
+ln -s $DOTFILES_PATH/.gitconfig ~/.gitconfig
+ln -s $DOTFILES_PATH/qutebrowser ~/.config/qutebrowser
+ln -s $DOTFILES_PATH/init.vim ~/.config/nvim/init.vim
+ln -s $DOTFILES_PATH/i3_config ~/.config/i3/config

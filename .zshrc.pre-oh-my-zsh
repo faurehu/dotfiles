@@ -1,0 +1,38 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/faure/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstal
+
+# Environment variables
+export EDITOR=nvim
+export VISUAL=nvim
+export BROWSER=qute
+
+# Enable autojump
+source /etc/profile.d/autojump.zsh
+
+# Aliases
+alias hibernate="i3lock && systemctl hibernate"
+alias suspend="i3lock && systemctl suspend"
+alias emacs="emacs -nw"
+alias qutebrowser="firejail qutebrowser --backend webengine"
+alias vim="nvim"
+
+# Editing path for sudoless npm install -g
+export PATH=$HOME/.node_modules/bin:$PATH
+export npm_config_prefix=~/.node_modules
+
+# Pet setup
+function prev() {
+	PREV=$(fc -lrn | head -n 1)
+	sh -c "pet new `printf %q "$PREV"`"
+}
