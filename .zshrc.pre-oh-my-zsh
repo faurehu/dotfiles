@@ -31,8 +31,24 @@ alias vim="nvim"
 export PATH=$HOME/.node_modules/bin:$PATH
 export npm_config_prefix=~/.node_modules
 
+# Golang env vars
+export GOPATH=~/Development/gocode
+export PATH=$PATH:$GOPATH/bin
+
+# Adding the android SDK to PATH for React Native debugging
+export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion/tools:$PATH
+export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion:$PATH
+
 # Pet setup
 function prev() {
 	PREV=$(fc -lrn | head -n 1)
 	sh -c "pet new `printf %q "$PREV"`"
 }
+
+# Search history with up down keys
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search

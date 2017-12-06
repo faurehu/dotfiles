@@ -1,0 +1,4 @@
+
+[Default Applications]
+x-scheme-handler/nylas=nylas.desktop
+application/pdf=apvlv.desktop

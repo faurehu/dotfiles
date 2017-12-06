@@ -2,7 +2,9 @@
 " execute pathogen#infect()
 
 " VimPlug plugin manager
+" Call :PlugInstall to run
 call plug#begin('~/.config/nvim/plugged')
+Plug 'tomlion/vim-solidity'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
