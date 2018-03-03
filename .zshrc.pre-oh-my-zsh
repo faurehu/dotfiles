@@ -26,10 +26,12 @@ alias suspend="i3lock && systemctl suspend"
 alias emacs="emacs -nw"
 alias qutebrowser="firejail qutebrowser --backend webengine"
 alias vim="nvim"
+alias tn="tmux new-session"
+alias ta="tmux attach"
 
 # Editing path for sudoless npm install -g
-export PATH=$HOME/.node_modules/bin:$PATH
-export npm_config_prefix=~/.node_modules
+#export PATH=$HOME/.node_modules/bin:$PATH
+#export npm_config_prefix=~/.node_modules
 
 # Golang env vars
 export GOPATH=~/Development/gocode
@@ -52,3 +54,20 @@ zle -N down-line-or-beginning-search
 
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
+
+# Search history with ctrl R
+bindkey "^R" history-incremental-search-backward
+
+# NVM configs
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+# LND aliases
+alias lncli-alice="lncli --rpcserver=localhost:10001 --no-macaroons"
+alias lncli-bob="lncli --rpcserver=localhost:10002 --no-macaroons"
+alias lncli-charlie="lncli --rpcserver=localhost:10003 --no-macaroons"
+
+export MYVIMRC=/home/faure/.config/nvim/init.vim

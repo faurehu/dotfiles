@@ -64,4 +64,10 @@ nitrogen --restore &
 # Monitor positioning
 xrandr --output DP-1 --left-of DP-4
 
+# Turning GPU light off
+nvidia-settings --assign GPULogoBrightness=0
+
+# Compton i3 window shadowing
+compton -o 0.6 -r 20 -l -30 -t -10 -cCGb
+
 exec i3

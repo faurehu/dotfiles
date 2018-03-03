@@ -23,8 +23,8 @@ URxvt*color14 : #34E2E2
 URxvt*color7 : #D3D7CF
 URxvt*color15 : #EEEEEC
 
-URxvt*font:xft:Source Code Pro:pixelsize=25
-URxvt*boldFont:xft:Source Code Pro:style=Bold:pixelsize=25
+URxvt*font:xft:Source Code Pro:size=12
+URxvt*boldFont:xft:Source Code Pro:style=Bold:size=12
 
 ! Using both clipboard buffers
 URxvt.perl-ext-common: selection-to-clipboard,font-size

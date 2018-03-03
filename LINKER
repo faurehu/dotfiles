@@ -13,3 +13,4 @@ ln -s $DOTFILES_PATH/qutebrowser ~/.config/qutebrowser
 ln -s $DOTFILES_PATH/init.vim ~/.config/nvim/init.vim
 ln -s $DOTFILES_PATH/i3_config ~/.config/i3/config
 ln -s $DOTFILES_PATH/mimeapps.list ~/.config/mimeapps.list
+ln -s $DOTFILES_PATH/.tmux.conf ~/.tmux.conf

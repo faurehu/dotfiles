@@ -18,6 +18,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kassio/neoterm'
 Plug 'jceb/vim-orgmode'
+Plug 'Valloric/YouCompleteMe'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'sebdah/vim-delve'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " Enable syntax highlighting
@@ -144,11 +148,11 @@ let g:syntastic_loc_list_height = 4
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
 
-" ZoomWin mapping
-nnoremap <silent> <leader>f :ZoomWin<CR>
-
 " :find mapping
 nnoremap <C-p> :find<space>
+
+" clear higlights
+nnoremap <silent> <C-c> :noh<cr>
 
 " Airline
 let g:airline_skip_empty_sections = 1
@@ -184,4 +188,33 @@ nnoremap <silent> <leader>l :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> <leader>k :call neoterm#kill()<cr>
 
+" YouCompleteMe
+let g:ycm_python_binary_path = 'usr/bin/python'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Quickfix tools (taken from vim-go tutorial)
+let g:go_list_type = "quickfix"
+map <C-k> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
+" vim-go tutorial suggestions
+set autowrite " Writes content of file when calling ':make'
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+
+" ZoomWin replacement
+map <silent> <leader>f :tab split<cr>
+
+" Auto loaded (no idea by who)
 let g:python_host_prog = '/usr/bin/python'
