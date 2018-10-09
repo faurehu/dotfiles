@@ -15,7 +15,7 @@ compinit
 # Environment variables
 export EDITOR=nvim
 export VISUAL=nvim
-export BROWSER=qute
+export BROWSER=firefox
 
 # Enable autojump
 source /etc/profile.d/autojump.zsh
@@ -40,6 +40,9 @@ export PATH=$PATH:$GOPATH/bin
 # Adding the android SDK to PATH for React Native debugging
 export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion/tools:$PATH
 export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion:$PATH
+
+# Adding this for awscli
+export PATH=~/.local/bin:$PATH
 
 # Pet setup
 function prev() {
@@ -66,8 +69,27 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # LND aliases
-alias lncli-alice="lncli --rpcserver=localhost:10001 --no-macaroons"
-alias lncli-bob="lncli --rpcserver=localhost:10002 --no-macaroons"
+alias lncli-alice="lncli --rpcserver=localhost:10001 --macaroonpath=data/admin.macaroon"
+alias lncli-bob="lncli --rpcserver=localhost:10002 --macaroonpath=data/admin.macaroon"
 alias lncli-charlie="lncli --rpcserver=localhost:10003 --no-macaroons"
 
 export MYVIMRC=/home/faure/.config/nvim/init.vim
+
+export SPROMPT=$PROMPT
+
+# VI MODE visual indicator
+function zle-line-init zle-keymap-select {
+  case ${KEYMAP} in
+    (vicmd) PROMPT="${SPROMPT}%{$fg[yellow]%}*%{$reset_color%} ";;
+    (main|viins) PROMPT=$SPROMPT;;
+    (*) PROMPT=$SPROMPT;;
+  esac
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# virtualenvwrapper
+# export WORKON_HOME=~/Envs
+# source /usr/local/bin/virtualenvwrapper.sh

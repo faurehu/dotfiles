@@ -1,6 +1,3 @@
-" Pathogen plugin manager
-" execute pathogen#infect()
-
 " VimPlug plugin manager
 " Call :PlugInstall to run
 call plug#begin('~/.config/nvim/plugged')
@@ -10,6 +7,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-db'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-syntastic/syntastic'
@@ -22,6 +20,9 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sebdah/vim-delve'
 Plug 'jiangmiao/auto-pairs'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " Enable syntax highlighting
@@ -60,10 +61,11 @@ set laststatus=2
 set confirm
 
 " Enable use of mouse for all modes
-set mouse=a
+" Turned it off to be able to use urxvt+tmux+vim clipboard
+" set mouse=a
 
 " Set command window height to 2 lines
-set cmdheight=2
+set cmdheight=1
 
 " Display line numbers
 set number
@@ -216,5 +218,13 @@ let g:go_metalinter_autosave = 1
 " ZoomWin replacement
 map <silent> <leader>f :tab split<cr>
 
+" Toggle tmux status line off
+autocmd VimEnter,VimLeave * silent !tmux set status
+
 " Auto loaded (no idea by who)
 let g:python_host_prog = '/usr/bin/python'
+
+" Vimwiki
+:map >> <Plug>VimwikiIncreaseLvlSingleItem
+:map >>> <Plug>VimwikiIncreaseLvlWholeItem
+

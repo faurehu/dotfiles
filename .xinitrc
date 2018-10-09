@@ -48,7 +48,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-setxkbmap -layout gb
+setxkbmap -layout gb -option compose:ralt
 xmodmap ~/.Xmodmap
 
 # This makes space a mod when combined with other keys
@@ -62,12 +62,14 @@ xcape -e "$spare_modifier=space"
 nitrogen --restore &
 
 # Monitor positioning
-xrandr --output DP-1 --left-of DP-4
+# xrandr --output DP-1 --left-of DP-4 --rotate left
 
 # Turning GPU light off
-nvidia-settings --assign GPULogoBrightness=0
+# nvidia-settings --assign GPULogoBrightness=0
 
 # Compton i3 window shadowing
-compton -o 0.6 -r 20 -l -30 -t -10 -cCGb
+compton -o 0.6 -r 20 -l -30 -t -10 -cCGb --inactive-dim 0.1
+
+conky -c ~/.config/conky/conky.conf
 
 exec i3
