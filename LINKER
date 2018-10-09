@@ -9,7 +9,6 @@ ln -s $DOTFILES_PATH/.xinitrc ~/.xinitrc
 ln -s $DOTFILES_PATH/.xbindkeysrc ~/.xbindkeysrc
 ln -s $DOTFILES_PATH/.i3status.conf ~/.i3status.conf
 ln -s $DOTFILES_PATH/.gitconfig ~/.gitconfig
-ln -s $DOTFILES_PATH/qutebrowser ~/.config/qutebrowser
 ln -s $DOTFILES_PATH/init.vim ~/.config/nvim/init.vim
 ln -s $DOTFILES_PATH/i3_config ~/.config/i3/config
 ln -s $DOTFILES_PATH/mimeapps.list ~/.config/mimeapps.list
