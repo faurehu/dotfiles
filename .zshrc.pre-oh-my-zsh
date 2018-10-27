@@ -1,3 +1,11 @@
+# Profiler startup
+PROFILE_STARTUP=false
+if [[ "$PROFILE_STARTUP" == true ]]; then
+    PS4=$'%D{%M%S%.} %N:%i> '
+    exec 3>&2 2>$HOME/tmp/startlog.$$
+    setopt xtrace prompt_subst
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -23,14 +31,15 @@ source /etc/profile.d/autojump.zsh
 # Aliases
 alias hibernate="i3lock && systemctl hibernate"
 alias suspend="i3lock && systemctl suspend"
-alias emacs="emacs -nw"
-alias qutebrowser="firejail qutebrowser --backend webengine"
 alias vim="nvim"
 alias tn="tmux new-session"
 alias ta="tmux attach"
+alias i3u="vim ~/.config/i3/config"
+alias zshu="vim ~/.zshrc.pre-oh-my-zsh"
 
 # Editing path for sudoless npm install -g
 #export PATH=$HOME/.node_modules/bin:$PATH
+export PATH=$HOME/.yarn/bin:$PATH
 #export npm_config_prefix=~/.node_modules
 
 # Golang env vars
@@ -38,11 +47,11 @@ export GOPATH=~/Development/gocode
 export PATH=$PATH:$GOPATH/bin
 
 # Adding the android SDK to PATH for React Native debugging
-export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion/tools:$PATH
-export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion:$PATH
+#export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion/tools:$PATH
+#export PATH=/home/faure/Builds/genymotion/pkg/genymotion/opt/genymotion:$PATH
 
 # Adding this for awscli
-export PATH=~/.local/bin:$PATH
+#export PATH=~/.local/bin:$PATH
 
 # Pet setup
 function prev() {
@@ -66,15 +75,40 @@ bindkey "^R" history-incremental-search-backward
 
 # NVM configs
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+export NVM_NOT_LOADED=true
 
-# LND aliases
-alias lncli-alice="lncli --rpcserver=localhost:10001 --macaroonpath=data/admin.macaroon"
-alias lncli-bob="lncli --rpcserver=localhost:10002 --macaroonpath=data/admin.macaroon"
-alias lncli-charlie="lncli --rpcserver=localhost:10003 --no-macaroons"
+lazy_load_nvm() {
+  if $NVM_NOT_LOADED; then
+    export NVM_NOT_LOADED=false
+    unset -f node
+    unset -f yarn
+    unset -f npm
+    eval ". \"$NVM_DIR/nvm.sh\""
+  fi
+}
 
+nvm() {
+  lazy_load_nvm
+  nvm "$@"
+}
+
+node() {
+  lazy_load_nvm
+  node "$@"
+}
+
+yarn() {
+  lazy_load_nvm
+  yarn "$@"
+}
+
+npm() {
+  lazy_load_nvm
+  npm "$@"
+}
+
+#NVIM settings
 export MYVIMRC=/home/faure/.config/nvim/init.vim
-
 export SPROMPT=$PROMPT
 
 # VI MODE visual indicator
@@ -93,3 +127,9 @@ zle -N zle-keymap-select
 # virtualenvwrapper
 # export WORKON_HOME=~/Envs
 # source /usr/local/bin/virtualenvwrapper.sh
+
+# Profiler footer
+if [[ "$PROFILE_STARTUP" == true ]]; then
+    unsetopt xtrace
+    exec 2>&3 3>&-
+fi

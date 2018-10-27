@@ -1,30 +1,70 @@
-URxvt.transparent:	true
-URxvt.shading:		20
+URxvt.transparent:      true
+URxvt.shading:          20
 
-URxvt*background: #2B2B2B
-URxvt*foreground: #DEDEDE
+/* URxvt*background: #2B2B2B */
+/* URxvt*foreground: #DEDEDE */
 
-URxvt*colorUL: #86a2b0
+/* URxvt*colorUL: #86a2b0 */
 
-URxvt*color0 : #2E3436
-URxvt*color8 : #555753
-URxvt*color1 : #CC0000
-URxvt*color9 : #EF2929
-URxvt*color2 : #4E9A06
-URxvt*color10 : #8AE234
-URxvt*color3 : #C4A000
-URxvt*color11 : #FCE94F
-URxvt*color4 : #3465A4
-URxvt*color12 : #729FCF
-URxvt*color5 : #75507B
-URxvt*color13 : #AD7FA8
-URxvt*color6 : #06989A
-URxvt*color14 : #34E2E2
-URxvt*color7 : #D3D7CF
-URxvt*color15 : #EEEEEC
+/* URxvt*color0 : #2E3436 */
+/* URxvt*color1 : #CC0000 */
+/* URxvt*color2 : #4E9A06 */
+/* URxvt*color3 : #C4A000 */
+/* URxvt*color4 : #3465A4 */
+/* URxvt*color5 : #75507B */
+/* URxvt*color6 : #06989A */
+/* URxvt*color7 : #D3D7CF */
+/* URxvt*color8 : #555753 */
+/* URxvt*color9 : #EF2929 */
+/* URxvt*color10 : #8AE234 */
+/* URxvt*color11 : #FCE94F */
+/* URxvt*color13 : #AD7FA8 */
+/* URxvt*color12 : #729FCF */
+/* URxvt*color14 : #34E2E2 */
+/* URxvt*color15 : #EEEEEC */
 
-URxvt*font:xft:Hack-Regular:size=12
-URxvt*boldFont:xft:Hack-Bold:style=Bold:size=12
+URxvt*font:xft:Hack:size=10
+URxvt*boldFont:xft:Hack-Bold:style=Bold:size=10
 
 ! Using both clipboard buffers
-URxvt.perl-ext-common: selection-to-clipboard,font-size
+URxvt.perl-ext-common: selection-to-clipboard,font-resize
+
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
+
+*.foreground:   nord4
+*.background:   nord0
+*.cursorColor:  nord4
+*fading: 35
+*fadeColor: nord3
+
+*.color0: nord1
+*.color1: nord11
+*.color2: nord14
+*.color3: nord13
+*.color4: nord9
+*.color5: nord15
+*.color6: nord8
+*.color7: nord5
+*.color8: nord3
+*.color9: nord11
+*.color10: nord14
+*.color11: nord13
+*.color12: nord9
+*.color13: nord15
+*.color14: nord7
+*.color15: nord6

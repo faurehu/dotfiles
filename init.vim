@@ -23,6 +23,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'vimwiki/vimwiki'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -36,6 +37,12 @@ set nocompatible
 
 " Set color
 colorscheme gotham256
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+let g:nord_comment_brightness = 12
+let g:nord_cursor_line_number_background = 1
+" colorscheme nord
 
 " Map space as leader
 let mapleader = "\<Space>"
@@ -158,7 +165,9 @@ nnoremap <silent> <C-c> :noh<cr>
 
 " Airline
 let g:airline_skip_empty_sections = 1
-let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+" let g:airline_theme='luna'
+let g:airline_theme='nord'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -177,18 +186,18 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd WinEnter * if winnr('$') > 1|lclose|endif
 
 " Neoterm
-let g:neoterm_position = 'horizontal'
-nnoremap <silent> <f10> :TREPLSendFile<cr>
-nnoremap <silent> <f9> :TREPLSendLine<cr>
-vnoremap <silent> <f9> :TREPLSendSelection<cr>
+"let g:neoterm_default_mod = ''
+"nnoremap <silent> <f10> :TREPLSendFile<cr>
+"nnoremap <silent> <f9> :TREPLSendLine<cr>
+"vnoremap <silent> <f9> :TREPLSendSelection<cr>
 " open terminal
-nnoremap <silent> <leader>t :call neoterm#toggle()<cr><C-w>j
+"nnoremap <silent> <leader>t :call neoterm#toggle()<cr><C-w>j
 " hide/close terminal
-nnoremap <silent> <leader>h :call neoterm#close()<cr>
+"nnoremap <silent> <leader>h :call neoterm#close()<cr>
 " clear terminal
-nnoremap <silent> <leader>l :call neoterm#clear()<cr>
+"nnoremap <silent> <leader>l :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
-nnoremap <silent> <leader>k :call neoterm#kill()<cr>
+"nnoremap <silent> <leader>k :call neoterm#kill()<cr>
 
 " YouCompleteMe
 let g:ycm_python_binary_path = 'usr/bin/python'
@@ -227,4 +236,3 @@ let g:python_host_prog = '/usr/bin/python'
 " Vimwiki
 :map >> <Plug>VimwikiIncreaseLvlSingleItem
 :map >>> <Plug>VimwikiIncreaseLvlWholeItem
-

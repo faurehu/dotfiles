@@ -43,9 +43,10 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec urxvt +sb -e sh -c 'tmux new-session'
+# bindsym $mod+Return exec i3-sensible-terminal
 
 # start ranger
-# bindsym $mod+Shift+w exec urxvt +sb -e sh -c 'ranger'
+bindsym $mod+Shift+n exec spacefm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -135,7 +136,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 # I changed restart for reload
-bindsym $mod+Shift+r reload
+bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -168,26 +169,27 @@ bindsym $mod+Shift+b mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status --config ~/.i3status.conf
-	position top
+# bar {
+        #status_command i3status --config ~/.i3status.conf
+	# position bottom
 	# mode hide
 	# modifier Mod4
-}
+        # status_command i3blocks
+# }
 
 # Custom bindings
 
 # suspend the system
-bindsym $mod+Shift+s exec "i3lock; systemctl suspend"
+bindsym $mod+Shift+s exec "i3lock-wrapper; systemctl suspend"
 
 # hibernate the system
-bindsym $mod+Shift+z exec "i3lock; systemctl hibernate"
+bindsym $mod+Shift+z exec "i3lock-wrapper; systemctl hibernate"
 
 # start a new browser session
 # bindsym $mod+b exec "qutebrowser"
 
 # lock screen
-bindsym $mod+Shift+a exec "i3lock"
+bindsym $mod+Shift+a exec "i3lock-wrapper"
 
 # screengrab
 bindsym $mod+Shift+g exec --no-startup-id "gscreenshot-cli -s -c -f /home/faure/Screenshots/"
@@ -224,6 +226,12 @@ bindsym $mod+Shift+d exec i3-input -F 'workspace "%s"'
 # workspace 0 output DP-4
 
 # volume control
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 2 +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 2 -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 2 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle
+
+# Floating pop ups
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh

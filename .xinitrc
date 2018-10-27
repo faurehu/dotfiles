@@ -70,6 +70,4 @@ nitrogen --restore &
 # Compton i3 window shadowing
 compton -o 0.6 -r 20 -l -30 -t -10 -cCGb --inactive-dim 0.1
 
-conky -c ~/.config/conky/conky.conf
-
 exec i3
