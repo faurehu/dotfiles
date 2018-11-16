@@ -25,6 +25,8 @@ URxvt.shading:          20
 
 URxvt*font:xft:Hack:size=10
 URxvt*boldFont:xft:Hack-Bold:style=Bold:size=10
+URxvt.internalBorder:  20
+URxvt.scrollBar:  False
 
 ! Using both clipboard buffers
 URxvt.perl-ext-common: selection-to-clipboard,font-resize

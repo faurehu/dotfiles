@@ -1,13 +1,11 @@
 " VimPlug plugin manager
 " Call :PlugInstall to run
 call plug#begin('~/.config/nvim/plugged')
-Plug 'tomlion/vim-solidity'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-db'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-syntastic/syntastic'
@@ -15,10 +13,9 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kassio/neoterm'
-Plug 'jceb/vim-orgmode'
 Plug 'Valloric/YouCompleteMe'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'sebdah/vim-delve'
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" Plug 'sebdah/vim-delve'
 Plug 'jiangmiao/auto-pairs'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
@@ -150,15 +147,17 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_jump = 3
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 4
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_typescript_checkers = ['tslint']
 
-" :find mapping
-nnoremap <C-p> :find<space>
+" Typescriptsupport
+au BufRead,BufNewFile *.tsx set ft=typescript
 
 " clear higlights
 nnoremap <silent> <C-c> :noh<cr>
@@ -166,7 +165,6 @@ nnoremap <silent> <C-c> :noh<cr>
 " Airline
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='luna'
 let g:airline_theme='nord'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -178,26 +176,26 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
+" Closing error windows before creating new windows
+autocmd WinEnter * if winnr('$') > 1|lclose|endif
+
 " Terminal
 tnoremap <Esc> <C-\><C-n>
 autocmd BufWinEnter,WinEnter term://* startinsert
 
-" Closing error windows before creating new windows
-autocmd WinEnter * if winnr('$') > 1|lclose|endif
-
 " Neoterm
-"let g:neoterm_default_mod = ''
-"nnoremap <silent> <f10> :TREPLSendFile<cr>
-"nnoremap <silent> <f9> :TREPLSendLine<cr>
-"vnoremap <silent> <f9> :TREPLSendSelection<cr>
+let g:neoterm_default_mod = 'rightbelow'
+nnoremap <silent> <f10> :TREPLSendFile<cr>
+nnoremap <silent> <f9> :TREPLSendLine<cr>
+vnoremap <silent> <f9> :TREPLSendSelection<cr>
 " open terminal
-"nnoremap <silent> <leader>t :call neoterm#toggle()<cr><C-w>j
+nnoremap <silent> <leader>t :Ttoggle<cr><C-w>j
 " hide/close terminal
-"nnoremap <silent> <leader>h :call neoterm#close()<cr>
+nnoremap <silent> <leader>h :Tclose<cr>
 " clear terminal
-"nnoremap <silent> <leader>l :call neoterm#clear()<cr>
+nnoremap <silent> <leader>l :Tclear<cr>
 " kills the current job (send a <c-c>)
-"nnoremap <silent> <leader>k :call neoterm#kill()<cr>
+nnoremap <silent> <leader>k :Tkill<cr>
 
 " YouCompleteMe
 let g:ycm_python_binary_path = 'usr/bin/python'
@@ -205,24 +203,24 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " Quickfix tools (taken from vim-go tutorial)
-let g:go_list_type = "quickfix"
-map <C-k> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
+" let g:go_list_type = \"quickfix"
+" map <C-k> :cnext<CR>
+" map <C-m> :cprevious<CR>
+" nnoremap <leader>a :cclose<CR>
 
 " vim-go tutorial suggestions
-set autowrite " Writes content of file when calling ':make'
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_autosave = 1
+" set autowrite " Writes content of file when calling ':make'
+" autocmd FileType go nmap <leader>b  <Plug>(go-build)
+" autocmd FileType go nmap <leader>r  <Plug>(go-run)
+" let g:go_highlight_types = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_extra_types = 1
+" autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+" let g:go_metalinter_autosave = 1
 
 " ZoomWin replacement
 map <silent> <leader>f :tab split<cr>
@@ -236,3 +234,7 @@ let g:python_host_prog = '/usr/bin/python'
 " Vimwiki
 :map >> <Plug>VimwikiIncreaseLvlSingleItem
 :map >>> <Plug>VimwikiIncreaseLvlWholeItem
+
+" ctrl-p ignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_working_path_mode = 'ra'

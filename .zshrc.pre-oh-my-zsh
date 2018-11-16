@@ -1,5 +1,5 @@
 # Profiler startup
-PROFILE_STARTUP=false
+PROFILE_STARTUP=true
 if [[ "$PROFILE_STARTUP" == true ]]; then
     PS4=$'%D{%M%S%.} %N:%i> '
     exec 3>&2 2>$HOME/tmp/startlog.$$
@@ -32,14 +32,21 @@ source /etc/profile.d/autojump.zsh
 alias hibernate="i3lock && systemctl hibernate"
 alias suspend="i3lock && systemctl suspend"
 alias vim="nvim"
+alias cat="bat"
 alias tn="tmux new-session"
 alias ta="tmux attach"
 alias i3u="vim ~/.config/i3/config"
 alias zshu="vim ~/.zshrc.pre-oh-my-zsh"
+alias vimu="vim ~/.config/nvim/init.vim"
+alias polyu="vim ~/.config/polybar/config"
+alias wiki="vim -c \"VimwikiIndex\""
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias tigs="tig status"
 
 # Editing path for sudoless npm install -g
 #export PATH=$HOME/.node_modules/bin:$PATH
 export PATH=$HOME/.yarn/bin:$PATH
+export PATH=$HOME/bin:$PATH
 #export npm_config_prefix=~/.node_modules
 
 # Golang env vars
@@ -57,6 +64,12 @@ export PATH=$PATH:$GOPATH/bin
 function prev() {
 	PREV=$(fc -lrn | head -n 1)
 	sh -c "pet new `printf %q "$PREV"`"
+}
+
+# Help
+function help() {
+        PREV=$(fc -lrn | head -n 1 | cut -d " " -f1)
+        sh -c "man $PREV"
 }
 
 # Search history with up down keys
@@ -125,11 +138,26 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 # virtualenvwrapper
-# export WORKON_HOME=~/Envs
-# source /usr/local/bin/virtualenvwrapper.sh
+ export WORKON_HOME=~/.Envs
+ source /usr/bin/virtualenvwrapper_lazy.sh
+ source ~/.autoenv/activate.sh
 
 # Profiler footer
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
 fi
+
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--layout=reverse --border --bind='ctrl-o:execute(nvim {})+abort'"
+export FZF_TMUX=1
+
+# bat
+export BAT_THEME="Nord"
+
+# mpw
+source $HOME/.mpw
