@@ -8,19 +8,21 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-syntastic/syntastic'
-Plug 'kien/ctrlp.vim'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kassio/neoterm'
-Plug 'Valloric/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " Plug 'sebdah/vim-delve'
 Plug 'jiangmiao/auto-pairs'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'vimwiki/vimwiki'
 Plug 'arcticicestudio/nord-vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'iansk/vim-tsx', {'for': 'typescript.tsx'}
 call plug#end()
 
 " Enable syntax highlighting
@@ -34,12 +36,6 @@ set nocompatible
 
 " Set color
 colorscheme gotham256
-let g:nord_italic = 1
-let g:nord_underline = 1
-let g:nord_italic_comments = 1
-let g:nord_comment_brightness = 12
-let g:nord_cursor_line_number_background = 1
-" colorscheme nord
 
 " Map space as leader
 let mapleader = "\<Space>"
@@ -122,8 +118,8 @@ set infercase
 " Strip whitespace on save
 autocmd BufWritePre * StripWhitespace
 
-" Grep
-nnoremap <C-f> :grep<space>
+" Search
+nnoremap <C-f> :Ag<CR>
 
 " Instant searching
 set incsearch
@@ -134,10 +130,6 @@ set path=.,**
 " Set numbers relative
 set relativenumber
 
-" Improve :grep
-set grepprg=ack\ --nogroup\ --column\ $*
-set grepformat=%f:%l:%c:%m
-
 " Folding
 set foldmethod=indent
 set foldlevelstart=20
@@ -145,45 +137,23 @@ set foldlevelstart=20
 " Explorer
 map <silent> <C-n> :NERDTreeToggle<CR>
 
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_jump = 3
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_loc_list_height = 4
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_checkers = ['tslint']
-
 " Typescriptsupport
-au BufRead,BufNewFile *.tsx set ft=typescript
+autocmd BufRead,BufNewFile *.tsx set ft=typescript
 
-" clear higlights
+" clear highlights
 nnoremap <silent> <C-c> :noh<cr>
 
 " Airline
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='nord'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" CtrlP
-set runtimepath^=~/.config/nvim/plugged/ctrlp.vim
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
 
 " Closing error windows before creating new windows
 autocmd WinEnter * if winnr('$') > 1|lclose|endif
 
-" Terminal
-tnoremap <Esc> <C-\><C-n>
-autocmd BufWinEnter,WinEnter term://* startinsert
-
 " Neoterm
+tnoremap <Esc> <C-\><C-n>
+let g:neoterm_autojump = 1
 let g:neoterm_default_mod = 'rightbelow'
 nnoremap <silent> <f10> :TREPLSendFile<cr>
 nnoremap <silent> <f9> :TREPLSendLine<cr>
@@ -196,11 +166,6 @@ nnoremap <silent> <leader>h :Tclose<cr>
 nnoremap <silent> <leader>l :Tclear<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> <leader>k :Tkill<cr>
-
-" YouCompleteMe
-let g:ycm_python_binary_path = 'usr/bin/python'
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
 
 " Quickfix tools (taken from vim-go tutorial)
 " let g:go_list_type = \"quickfix"
@@ -235,6 +200,23 @@ let g:python_host_prog = '/usr/bin/python'
 :map >> <Plug>VimwikiIncreaseLvlSingleItem
 :map >>> <Plug>VimwikiIncreaseLvlWholeItem
 
-" ctrl-p ignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_working_path_mode = 'ra'
+" Ale
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_fixers = {'typescript': ['prettier', 'eslint']}
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_fix_on_save = 1
+let g:ale_list_window_size = 5
+let g:ale_open_list = 1
+
+" Enable deoplete at startup
+let g:deoplete#enable_at_startup = 1
+
+" fzf
+nnoremap <silent> <C-p> :GFiles<CR>
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
+
+command! -bang -nargs=* GFiles
+  \ call fzf#vim#gitfiles(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)

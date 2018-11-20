@@ -1,5 +1,5 @@
 # Profiler startup
-PROFILE_STARTUP=true
+PROFILE_STARTUP=false
 if [[ "$PROFILE_STARTUP" == true ]]; then
     PS4=$'%D{%M%S%.} %N:%i> '
     exec 3>&2 2>$HOME/tmp/startlog.$$
@@ -26,7 +26,9 @@ export VISUAL=nvim
 export BROWSER=firefox
 
 # Enable autojump
-source /etc/profile.d/autojump.zsh
+# source /etc/profile.d/autojump.zsh
+# fasd
+eval "$(fasd --init auto)"
 
 # Aliases
 alias hibernate="i3lock && systemctl hibernate"
@@ -42,6 +44,7 @@ alias polyu="vim ~/.config/polybar/config"
 alias wiki="vim -c \"VimwikiIndex\""
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias tigs="tig status"
+alias v='f -e vim'
 
 # Editing path for sudoless npm install -g
 #export PATH=$HOME/.node_modules/bin:$PATH

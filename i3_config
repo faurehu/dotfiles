@@ -205,9 +205,9 @@ bindsym $mod+Shift+u workspace next
 # workspace 0 output DP-4
 
 # volume control
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 10 +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 10 -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 10 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 12 +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 12 -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 12 toggle
 
 # Floating pop ups
 for_window [window_role="pop-up"] floating enable
