@@ -65,7 +65,10 @@ nitrogen --restore &
 # xrandr --output DP-1 --left-of DP-4 --rotate left
 
 # Turning GPU light off
-# nvidia-settings --assign GPULogoBrightness=0
+nvidia-settings --assign GPULogoBrightness=0
+
+# Start time tracking
+rescuetime &
 
 # Compton i3 window shadowing
 compton -o 0.6 -r 20 -l -30 -t -10 -cCGb --inactive-dim 0.1

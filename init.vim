@@ -22,7 +22,10 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'iansk/vim-tsx', {'for': 'typescript.tsx'}
+Plug 'ianks/vim-tsx', {'for': 'typescript.tsx'}
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'Valloric/ListToggle'
+Plug 'chaoren/vim-wordmotion'
 call plug#end()
 
 " Enable syntax highlighting
@@ -118,9 +121,6 @@ set infercase
 " Strip whitespace on save
 autocmd BufWritePre * StripWhitespace
 
-" Search
-nnoremap <C-f> :Ag<CR>
-
 " Instant searching
 set incsearch
 
@@ -137,8 +137,9 @@ set foldlevelstart=20
 " Explorer
 map <silent> <C-n> :NERDTreeToggle<CR>
 
-" Typescriptsupport
+" Typescript support
 autocmd BufRead,BufNewFile *.tsx set ft=typescript
+let g:nvim_typescript#diagnostics_enable = 0
 
 " clear highlights
 nnoremap <silent> <C-c> :noh<cr>
@@ -163,7 +164,7 @@ nnoremap <silent> <leader>t :Ttoggle<cr><C-w>j
 " hide/close terminal
 nnoremap <silent> <leader>h :Tclose<cr>
 " clear terminal
-nnoremap <silent> <leader>l :Tclear<cr>
+" nnoremap <silent> <leader>l :Tclear<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> <leader>k :Tkill<cr>
 
@@ -207,13 +208,16 @@ let g:ale_fixers = {'typescript': ['prettier', 'eslint']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 let g:ale_list_window_size = 5
-let g:ale_open_list = 1
+" let g:ale_open_list = 1
+let g:ale_lint_on_enter = 1
 
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
 
 " fzf
 nnoremap <silent> <C-p> :GFiles<CR>
+nnoremap <silent> <C-h> :History<CR>
+nnoremap <C-f> :Ag<CR>
 
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
