@@ -73,4 +73,7 @@ rescuetime &
 # Compton i3 window shadowing
 compton -o 0.6 -r 20 -l -30 -t -10 -cCGb --inactive-dim 0.1
 
+# Clipster
+# clipster -d
+
 exec i3

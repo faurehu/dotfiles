@@ -44,7 +44,7 @@ alias polyu="vim ~/.config/polybar/config"
 alias wiki="vim -c \"VimwikiIndex\""
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias tigs="tig status"
-alias v='f -e vim'
+alias v='f -e nvim'
 
 # Editing path for sudoless npm install -g
 #export PATH=$HOME/.node_modules/bin:$PATH
@@ -164,3 +164,8 @@ export BAT_THEME="Nord"
 
 # mpw
 source $HOME/.mpw
+
+# ibus
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus

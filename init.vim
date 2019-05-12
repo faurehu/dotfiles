@@ -26,6 +26,10 @@ Plug 'ianks/vim-tsx', {'for': 'typescript.tsx'}
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'Valloric/ListToggle'
 Plug 'chaoren/vim-wordmotion'
+Plug 'tpope/vim-projectionist'
+Plug 'kshenoy/vim-signature'
+Plug 'mattn/emmet-vim'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 " Enable syntax highlighting
@@ -140,6 +144,7 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 " Typescript support
 autocmd BufRead,BufNewFile *.tsx set ft=typescript
 let g:nvim_typescript#diagnostics_enable = 0
+let g:typescript_compiler_options = "--lib esnext --lib dom --jsx react"
 
 " clear highlights
 nnoremap <silent> <C-c> :noh<cr>
@@ -220,7 +225,23 @@ nnoremap <silent> <C-h> :History<CR>
 nnoremap <C-f> :Ag<CR>
 
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
+\ call fzf#vim#ag(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
 
 command! -bang -nargs=* GFiles
-  \ call fzf#vim#gitfiles(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
+\ call fzf#vim#gitfiles(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
+
+" Projectionist
+nnoremap <leader>a :AV<CR>
+
+" Show buffer list
+nnoremap <leader>\ :ls<CR>
+
+" Disable annoying ex mode
+map q: <Nop>
+nnoremap Q <nop>
+
+" Newtab
+nnoremap <leader>n :tabedit<CR>
+
+" Clipboard
+vnoremap <C-c> "+y
