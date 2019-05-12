@@ -1,0 +1,168 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "vim.statusBarColorControl": true,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f"
+  },
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.maxColumn": 80,
+  "editor.minimap.showSlider": "always",
+  "editor.minimap.side": "left",
+  "editor.parameterHints.enabled": false,
+  "workbench.activityBar.visible": false,
+  "workbench.iconTheme": "file-icons",
+  "breadcrumbs.enabled": true,
+  "zenMode.hideLineNumbers": false,
+  "search.location": "panel",
+  "editor.lineHeight": 0.28,
+  "window.zoomLevel": 1,
+  "editor.lineNumbers": "relative",
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["<C-n>"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<C-b>"],
+      "commands": ["outline.focus"]
+    },
+    {
+      "before": ["left"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": ["down"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["<C-n>"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<C-b>"],
+      "commands": ["outline.focus"]
+    },
+    {
+      "before": ["left"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": ["right"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["up"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    },
+    {
+      "before": ["down"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["workbench.action.toggleZenMode"]
+    },
+    {
+      "before": ["<leader>", "m"],
+      "commands": ["editor.action.toggleMinimap"]
+    },
+    {
+      "before": ["<leader>", "v"],
+      "commands": ["workbench.action.splitEditor"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.splitEditorOrthogonal"]
+    },
+    {
+      "before": ["<leader>", "c"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    },
+    {
+      "before": ["<leader>", "n"],
+      "commands": ["workbench.action.files.newUntitledFile"]
+    },
+    {
+      "before": ["<C-f>"],
+      "commands": ["workbench.action.findInFiles"]
+    },
+    {
+      "before": ["<leader>", "l"],
+      "commands": ["workbench.actions.view.problems"]
+    },
+    {
+      "before": ["<C-j>"],
+      "commands": ["editor.action.marker.next"]
+    },
+    {
+      "before": ["<C-k>"],
+      "commands": ["editor.action.marker.prev"]
+    },
+    {
+      "before": ["<leader>", "r"],
+      "commands": ["editor.action.referenceSearch.trigger"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["editor.action.peekDefinition"]
+    },
+    {
+      "before": ["<leader>", "i"],
+      "commands": ["editor.action.peekImplementation"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<C-n>"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<C-b>"],
+      "commands": ["outline.focus"]
+    },
+    {
+      "before": ["left"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": ["right"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["up"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    },
+    {
+      "before": ["down"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    }
+  ],
+  "vim.leader": "<Space>",
+  "vim.foldfix": true,
+  "editor.minimap.enabled": false,
+  "vim.camelCaseMotion.enable": true,
+  "vim.easymotion": true,
+  "zenMode.hideTabs": false,
+  "zenMode.hideStatusBar": false,
+  "typescript.implementationsCodeLens.enabled": true,
+  "prettier.jsxBracketSameLine": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "git.enableSmartCommit": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.referencesCodeLens.enabled": true,
+  "javascript.suggest.completeFunctionCalls": true,
+  "javascript.suggest.completeJSDocs": false,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "explorer.autoReveal": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
