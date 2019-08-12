@@ -30,6 +30,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'kshenoy/vim-signature'
 Plug 'mattn/emmet-vim'
 Plug 'majutsushi/tagbar'
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -125,8 +126,8 @@ set infercase
 " Strip whitespace on save
 autocmd BufWritePre * StripWhitespace
 
-" Instant searching
 set incsearch
+" Instant searching
 
 " Set path
 set path=.,**
@@ -138,8 +139,12 @@ set relativenumber
 set foldmethod=indent
 set foldlevelstart=20
 
-" Explorer
-map <silent> <C-n> :NERDTreeToggle<CR>
+" Highlight current line
+set cursorline
+
+" NerdTree
+"https://stackoverflow.com/questions/33465357/one-mapping-to-toggle-nerdtree-and-open-to-current-file-when-toggling-on
+nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 
 " Typescript support
 autocmd BufRead,BufNewFile *.tsx set ft=typescript
@@ -152,7 +157,30 @@ nnoremap <silent> <C-c> :noh<cr>
 " Airline
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='nord'
+let g:airline_theme='luna'
+let g:airline_section_b=''
+let g:airline_section_x=''
+let g:airline_section_y=''
+let g:airline_section_z=''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#exclude_preview = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_splits = 0
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 
 " Closing error windows before creating new windows
 autocmd WinEnter * if winnr('$') > 1|lclose|endif
@@ -168,8 +196,6 @@ vnoremap <silent> <f9> :TREPLSendSelection<cr>
 nnoremap <silent> <leader>t :Ttoggle<cr><C-w>j
 " hide/close terminal
 nnoremap <silent> <leader>h :Tclose<cr>
-" clear terminal
-" nnoremap <silent> <leader>l :Tclear<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> <leader>k :Tkill<cr>
 
@@ -209,15 +235,10 @@ let g:python_host_prog = '/usr/bin/python'
 " Ale
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-let g:ale_fixers = {'typescript': ['prettier', 'eslint']}
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_fixers = {'typescript': ['prettier', 'tslint']}
 let g:ale_fix_on_save = 1
 let g:ale_list_window_size = 5
-" let g:ale_open_list = 1
 let g:ale_lint_on_enter = 1
-
-" Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
 
 " fzf
 nnoremap <silent> <C-p> :GFiles<CR>
@@ -225,7 +246,7 @@ nnoremap <silent> <C-h> :History<CR>
 nnoremap <C-f> :Ag<CR>
 
 command! -bang -nargs=* Ag
-\ call fzf#vim#ag(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
+\ call fzf#vim#ag(<q-args>,fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%'),<bang>0)
 
 command! -bang -nargs=* GFiles
 \ call fzf#vim#gitfiles(<q-args>,fzf#vim#with_preview('right:50%'),<bang>0)
@@ -234,7 +255,8 @@ command! -bang -nargs=* GFiles
 nnoremap <leader>a :AV<CR>
 
 " Show buffer list
-nnoremap <leader>\ :ls<CR>
+" nnoremap <leader>\ :ls<CR>:b<space>
+nnoremap <leader>\ :bd<CR>
 
 " Disable annoying ex mode
 map q: <Nop>
@@ -243,5 +265,9 @@ nnoremap Q <nop>
 " Newtab
 nnoremap <leader>n :tabedit<CR>
 
-" Clipboard
+" Clipboard copy
 vnoremap <C-c> "+y
+
+" coc.nvim
+nnoremap <C-T> :CocList symbols<CR>
+nnoremap <C-Y> :CocList yank<CR>

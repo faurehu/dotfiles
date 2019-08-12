@@ -169,3 +169,7 @@ source $HOME/.mpw
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
+
+# Ruby
+export PATH=$PATH:/home/faure/.gem/ruby/2.6.0/bin
+export PATH=$PATH:/root/.gem/ruby/2.6.0/bin
